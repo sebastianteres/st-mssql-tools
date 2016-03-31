@@ -61,6 +61,25 @@ The SQL file contains scripts to create the following:
 - Insert/Update stored procedure (usp_TableName_Post)
   - It takes only one parameter named @p_Records of type UDT (the corresponding generated UDT). This procedure can save a single row or multiple rows (see st-mssql-proc for more information).
 
+The Javascript file contains a module that exports the table object with methods to access the generated stored procedures:
+
+#### Static methods
+
+##### TableName.all
+Returns a st-promise resolved with the list of all rows on the corresponding table.
+
+##### TableName.byId
+Takes an id.
+Returns a st-promise resolved with the single row if found.
+
+##### TableName.saveList
+Takes an array of objects that conform to the generated UDT.
+Returns a st-promise resolved with the list of all new and updated rows.
+
+#### Instance methods
+##### save
+Saves the instance to the DB by calling usp_TableName_Post
+
 ## Limitations
 
 Right now it only works for tables with one identity column (auto-increment).  
