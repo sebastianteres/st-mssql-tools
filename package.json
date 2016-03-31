@@ -1,0 +1,30 @@
+{
+  "name": "st-mssql-tools",
+  "version": "1.0.0",
+  "description": "CLI Tool to generate standard node modules for a given set of MSSQL DB tables",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastianteres/st-mssql-tools.git"
+  },
+  "keywords": [
+    "mssql"
+  ],
+  "author": "Sebastian Perez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sebastianteres/st-mssql-tools/issues"
+  },
+  "homepage": "https://github.com/sebastianteres/st-mssql-tools#readme",
+  "dependencies": {
+    "st-mssql-proc": "^1.0.0",
+    "st-promise": "^1.0.0",
+    "swig": "^1.4.2"
+  },
+  "bin": {
+    "st-mssql": "./cli.js"
+  }
+}
