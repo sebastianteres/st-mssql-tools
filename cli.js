@@ -120,7 +120,8 @@ function parseColumns (columns) {
         parsedColumns.push({
             name: col.COLUMN_NAME,
             isIdentity: col.TYPE_NAME.indexOf('identity') >= 0,
-            definition: getColumnTypeDefinition(col.COLUMN_NAME, col.TYPE_NAME, col.PRECISION, col.SCALE)
+            definition: '[' + col.COLUMN_NAME + '] ' + getColumnTypeDefinition(col.TYPE_NAME, col.PRECISION, col.SCALE),
+            properties: getColumnTypeDefinition(col.TYPE_NAME, col.PRECISION, col.SCALE)
         });
     });
     return parsedColumns;
@@ -134,17 +135,17 @@ function getIdentityColumn (parsedColumns) {
     return identity;
 }
 
-function getColumnTypeDefinition(column, type, precision, scale) {
+function getColumnTypeDefinition(type, precision, scale) {
     let isIdentity = type.indexOf('identity') >= 0,
         strings = ['char', 'varchar', 'nchar', 'nvarchar'];
     if (isIdentity) {
         type = type.replace('identity', '').trim();
     }
     if (strings.indexOf(type) >= 0) {
-        return '[' + column + '] ' + type + ' (' + precision + ')';
+        return type + ' (' + precision + ')';
     } else if (type === 'decimal') {
-        return '[' + column + '] ' + type + ' (' + precision + ', '+ scale + ')';
+        return type + ' (' + precision + ', '+ scale + ')';
     } else {
-        return '[' + column + '] ' + type;
+        return type;
     }
 }
