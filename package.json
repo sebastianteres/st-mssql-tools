@@ -1,6 +1,6 @@
 {
   "name": "st-mssql-tools",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI Tool to generate standard node modules for a given set of MSSQL DB tables",
   "main": "index.js",
   "scripts": {
