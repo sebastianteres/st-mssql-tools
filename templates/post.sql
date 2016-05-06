@@ -24,22 +24,22 @@ BEGIN
 	UPDATE [dbo].[{{table}}]
 	   SET
         {% for col in columns %}{% if !col.isIdentity %}
-         [{{col.name}}] = r.{{col.name}}{% if !loop.last %},{% endif %}{% endif %}{% endfor %}
+         [{{col.name}}] = r.[{{col.name}}]{% if !loop.last %},{% endif %}{% endif %}{% endfor %}
 	OUTPUT inserted.*
 	INTO @Result
 	FROM {{table}} t
-	JOIN @p_Records r ON t.{{identity.name}} = r.{{identity.name}}
+	JOIN @p_Records r ON t.[{{identity.name}}] = r.[{{identity.name}}]
 
 	-- Insert new records
 	INSERT INTO [dbo].{{table}}
-           ({% for col in columns %}{% if !col.isIdentity %}{{col.name}}{% if !loop.last %},{% endif %}
+           ({% for col in columns %}{% if !col.isIdentity %}[{{col.name}}]{% if !loop.last %},{% endif %}
                {% endif %}{% endfor %})
 	OUTPUT inserted.*
 	INTO @Result
 	SELECT {% for col in columns %}{% if !col.isIdentity %}
-        r.{{col.name}}{% if !loop.last %},{% endif %}{% endif %}{% endfor %}
+        r.[{{col.name}}]{% if !loop.last %},{% endif %}{% endif %}{% endfor %}
 	FROM @p_Records r
-	WHERE r.{{identity.name}} IS NULL
+	WHERE r.[{{identity.name}}] IS NULL
 
 	SELECT * FROM @Result
 END

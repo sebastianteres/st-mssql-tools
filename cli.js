@@ -141,10 +141,10 @@ function getColumnTypeDefinition(column, type, precision, scale) {
         type = type.replace('identity', '').trim();
     }
     if (strings.indexOf(type) >= 0) {
-        return column + ' ' + type + ' (' + precision + ')';
+        return '[' + column + '] ' + type + ' (' + precision + ')';
     } else if (type === 'decimal') {
-        return column + ' ' + type + ' (' + precision + ', '+ scale + ')';
+        return '[' + column + '] ' + type + ' (' + precision + ', '+ scale + ')';
     } else {
-        return column + ' ' + type;
+        return '[' + column + '] ' + type;
     }
 }

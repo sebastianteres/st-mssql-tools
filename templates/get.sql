@@ -19,8 +19,8 @@ BEGIN
 
     -- Insert statements for procedure here
 	SELECT {% for col in columns %}
-         {{col.name}}{% if !loop.last %},{% endif %}{% endfor %}
+         [{{col.name}}]{% if !loop.last %},{% endif %}{% endfor %}
 	  FROM [dbo].[{{table}}]
-	  WHERE (@p_{{identity.name}} is null OR {{identity.name}} = @p_{{identity.name}})
+	  WHERE (@p_{{identity.name}} is null OR [{{identity.name}}] = @p_{{identity.name}})
 
 END
